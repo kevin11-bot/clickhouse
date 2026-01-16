@@ -12,6 +12,13 @@
             "email": "k40050@gmail.com"
         }
     ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pioneers\\ClickHouse\\ClickHouseServiceProvider"
+            ]
+        }
+    },
     "require": {
         "php": "^8.2",
         "smi2/phpclickhouse": "^1.5.3",
