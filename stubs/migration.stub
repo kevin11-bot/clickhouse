@@ -1,0 +1,19 @@
+<?php
+
+use Pioneers\ClickHouse\Schema\ColumnBlueprint;
+use Pioneers\ClickHouse\Schema\Migration;
+use Pioneers\ClickHouse\Schema\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('', function (ColumnBlueprint $table, Schema $schema) {
+            $schema->engine->mergeTree();
+            $schema->order->by();
+        });
+    }
+};
