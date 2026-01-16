@@ -5,7 +5,7 @@ namespace Pioneers\ClickHouse\Builder;
 class BuilderCount
 {
     public function __construct(
-        private string $column,
+        private readonly string $column,
         private ?string $alias = null
     ) {}
 
