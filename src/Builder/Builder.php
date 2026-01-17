@@ -44,6 +44,7 @@ class Builder
         'limit' => null,
         'offset' => null,
         'having' => null,
+        'withTotals' => false,
     ];
 
     public function __construct(?string $tableName = null, ?Model $model = null)
@@ -194,6 +195,13 @@ class Builder
         return $this;
     }
 
+    public function withTotals(bool $withTotals = true): self
+    {
+        $this->bindings['withTotals'] = $withTotals;
+
+        return $this;
+    }
+
     public function selectToSql(): string
     {
         return Grammar::getQuery($this);
@@ -201,12 +209,21 @@ class Builder
 
     public function get(): array|Collection
     {
-        $rows = $this->connection->client->select(
+        $query = $this->connection->client->select(
             $this->selectToSql()
-        )->rows();
+        );
+
+        $rows = $query->rows();
 
         if ($this->model && count($this->relations) > 0) {
-            return $this->fillRelations($rows);
+            $rows = $this->fillRelations($rows);
+        }
+
+        if ($this->bindings['withTotals']) {
+            return [
+                'rows' => $rows,
+                'totals' => $query->totals(),
+            ];
         }
 
         return $rows;

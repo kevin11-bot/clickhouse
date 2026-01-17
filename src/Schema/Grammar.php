@@ -89,7 +89,7 @@ readonly class Grammar
         $bindings = $query->getBindings();
 
         return sprintf(
-            '%s %s %s %s %s %s %s %s',
+            '%s %s %s %s %s %s %s %s %s',
             self::select(
                 $query->getTableName(),
                 $bindings['select'],
@@ -102,6 +102,7 @@ readonly class Grammar
             self::orderBy($bindings['orderBy']),
             self::limit($bindings['limit']),
             self::offset($bindings['offset']),
+            $bindings['withTotals'] ? 'WITH TOTALS' : '',
             $query->getSubQuery() ? ' ' : ' ;'
         );
     }
