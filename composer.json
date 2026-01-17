@@ -1,6 +1,6 @@
 {
     "name": "pioneers/clickhouse",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "autoload": {
         "psr-4": {
             "Pioneers\\ClickHouse\\": "src/"
